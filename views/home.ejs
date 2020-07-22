@@ -1,0 +1,99 @@
+<html>
+    <head>
+        <title>
+            <%=title%>
+        </title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-	B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+        <link rel="stylesheet" href="/css/home.css">
+    </head>
+    <body>
+        <div id="container">
+<!-- heading -->
+            <divi id="heading">
+                <h1>TASK TRACKER</h1>
+
+
+                <form action="/create-list" method="POST">
+                    <div id="description">
+                        <p>DESCRIPTION</p>
+                        <input type="text" id="description_text" name="desc" placeholder="What do you need to do?" required>
+                    </div>
+    <!-- category and due date -->
+                    <div id="row_3">
+                        <div id="category">
+                            <p>CATEGORY</p>
+    <!-- drop down menu -->
+                            <select name="dropdown" id="dropdown" required>
+                                <option value="Choose">Choose a category</option>
+                                <option value="personal">Personal</option>
+                                <option value="school">School</option>
+                                <option value="cleaning">Cleaning</option>
+                                <option value="others">Others</option>
+                            </select>
+                            
+                            
+                        </div>
+    <!-- select date -->
+                        <div id="due_date">
+                            <p>DUE DATE</p>
+                            <input type="date" id="date_input" name="date" required>
+                        </div>
+                    </div>
+    <!-- buttons -->
+                    <div class="buttons">
+                        <button type="submit" class="btn btn-secondary"> <i class="fas fa-plus"></i> Add Task</button>
+                        
+                            <label for="delete">
+                                <div>
+                                    <i class="fas fa-trash-alt"></i>
+                                    Delete Task
+                                </div>
+                            </label>
+                        
+                        
+                    </div>
+                </form>
+
+
+                <!-- <div id="buttons">
+                    <div>
+                        <button class="btn btn-secondary"><i class="fas fa-plus"></i>  &nbsp ADD TASK</button>
+                        <button class="btn btn-danger"><i class="fas fa-trash-alt"></i> &nbsp DELETE TASK</button>
+                    </div>
+                </div> -->
+
+<!-- list of tasks -->
+                <form action="/delete-task" method="POST">
+                    <div id="tasks" class="scroll">
+                        <ul>
+                            <% for(let i of task){%>
+                                <li>
+                                    <div class="data">
+                                        <div id="check_box">
+                                            <input type="checkbox" value="<%= i.id %>" name = "task">
+                                        </div>
+                                        
+                                        <div id="desc_date">
+                                            <h5><%= i.desc %></h5>
+                                            <i class="far fa-calendar-alt"></i>
+                                            <p><%=  i.date %></p>
+                                        </div>
+                                        <div id="cat">
+                                            <div><p><%= i.dropdown %></p></div>
+                                        </div>
+                                    </div>
+                                    
+                                </li>
+                            <% } %>
+                        </ul>
+                    </div>
+                    <input type="submit" id="delete" hidden>
+                </form>
+             </div>
+            
+        
+
+        <script type="text/javascript" src="/js/home.js"></script>
+    </body>
+</html>
